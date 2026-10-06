@@ -1,0 +1,18 @@
+DOSSIER DES IMAGES
+==================
+
+Placez ici vos images, puis remplacez les placeholders dans index.html
+(chaque emplacement est signalé par un commentaire HTML).
+
+Noms conseillés :
+  photo.jpg          -> photo principale (section Hero), format portrait 3:4
+  photo-2.jpg        -> seconde photo (section À propos), format 4:5
+  projet1-1.jpg      -> grande capture du projet 1 (format 16:10)
+  projet1-2.jpg      -> petite capture du projet 1
+  projet1-3.jpg      -> petite capture du projet 1
+  projet2-1.jpg      -> grande capture du projet 2 (format 16:10)
+  projet2-2.jpg      -> petite capture du projet 2
+  projet2-3.jpg      -> petite capture du projet 2
+
+Exemple de remplacement :
+  <img src="assets/images/photo.jpg" alt="Portrait d'Imane Mesllek">

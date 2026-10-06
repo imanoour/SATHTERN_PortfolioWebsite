@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imane Mesllek — Portfolio</title>
+  <meta name="description" content="Portfolio d'Imane Mesllek, étudiante en Génie Informatique : développement web, bases de données, conception UML.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%235C0A14%22/%3E%3Cpath fill=%22%23F3ECDA%22 d=%22M16 4c.6 7.4 4 10.8 12 12-8 .6-11.4 4-12 12-.6-8-4-11.4-12-12 8-.6 11.4-4 12-12z%22/%3E%3C/svg%3E">
+
+  <!-- Polices : Italiana (titres), Cormorant Garamond (accents), Montserrat (texte) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+/* ==========================================================================
+   PORTFOLIO — IMANE MESLLEK
+   Style éditorial : crème, bordeaux, typographies fines et élégantes.
+
+   Sommaire
+   1.  Variables (couleurs, polices, espacements)
+   2.  Base & reset
+   3.  Éléments communs (panneaux, titres, étoiles, boutons, badges)
+   4.  Navigation
+   5.  Hero / couverture
+   6.  À propos
+   7.  Compétences
+   8.  Projets
+   9.  Parcours
+   10. Savoir-faire
+   11. Contact & pied de page
+   12. Animations
+   13. Responsive
+   ========================================================================== */
+
+
+/* 1. VARIABLES — modifiez ici pour changer toute l'identité visuelle
+   ========================================================================== */
+:root {
+  --cream:      #F3ECDA;
+  --cream-deep: #E8DEC6;
+  --wine:       #5C0A14;
+  --wine-light: #7A1626;
+  --ink:        #1F1A1A;
+  --ink-soft:   #4A403D;
+  --backdrop:   #3A3837;   /* gris anthracite autour des panneaux */
+  --white:      #FFFDF8;
+
+  --font-display: 'Italiana', 'Cormorant Garamond', Georgia, serif;
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --panel-gap: clamp(14px, 2.2vw, 28px);
+  --panel-pad: clamp(24px, 5vw, 72px);
+  --max-width: 1240px;
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+
+/* 2. BASE & RESET
+   ========================================================================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  background: var(--backdrop);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  font-weight: 400;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; width: 100%; height: 100%; object-fit: cover; }
+svg { display: block; }
+
+::selection { background: var(--wine); color: var(--cream); }
+
+:focus-visible {
+  outline: 2px solid var(--wine-light);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 100px var(--panel-gap) 0;
+}
+
+
+/* 3. ÉLÉMENTS COMMUNS
+   ========================================================================== */
+
+/* --- Panneaux (les « pages » du magazine) --- */
+.panel {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto var(--panel-gap);
+  padding: var(--panel-pad);
+  overflow: hidden;
+}
+
+.panel--cream { background: var(--cream); color: var(--ink); }
+.panel--wine  { background: var(--wine);  color: var(--cream); }
+
+/* --- Titres de section --- */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6.5vw, 5.4rem);
+  line-height: .95;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: var(--cream);
+}
+
+.section-title--wine { color: var(--wine); }
+
+/* Grand numéro fantôme en arrière-plan */
+.ghost-number {
+  position: absolute;
+  top: -.12em;
+  right: .1em;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 22vw, 18rem);
+  line-height: 1;
+  color: currentColor;
+  opacity: .07;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* --- Étoiles décoratives --- */
+.star {
+  position: absolute;
+  height: auto;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.star--wine  { fill: var(--wine); }
+.star--cream { fill: var(--cream); }
+
+.bg-stars {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-stars .star { fill: #8F8A84; opacity: .55; }
+
+/* --- Boutons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .7em;
+  padding: 1em 1.9em;
+  border: 1px solid var(--wine);
+  font-family: var(--font-body);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color .35s var(--ease), color .35s var(--ease),
+              transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+
+.btn--wine {
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.btn--wine:hover {
+  background: var(--wine-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -12px rgba(92, 10, 20, .7);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--wine);
+}
+
+.btn--outline:hover {
+  background: var(--wine);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+
+.btn--large { font-size: .85rem; padding: 1.2em 2.4em; }
+
+.btn__arrow { transition: transform .35s var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(4px); }
+
+/* --- Badges technologiques --- */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  padding: .42em 1em;
+  border: 1px solid rgba(92, 10, 20, .35);
+  border-radius: 100px;
+  color: var(--wine);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+
+.badge:hover {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: var(--cream);
+}
+
+.badges--light .badge {
+  border-color: rgba(243, 236, 218, .35);
+  color: var(--cream);
+}
+
+.badges--light .badge:hover {
+  background: var(--cream);
+  border-color: var(--cream);
+  color: var(--wine);
+}
+
+/* --- Emplacements d'images (placeholders) --- */
+.placeholder {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.placeholder--portrait {
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .14), transparent 55%),
+    linear-gradient(160deg, var(--wine-light), var(--wine) 70%);
+  color: var(--cream);
+}
+
+.placeholder--soft {
+  background:
+    radial-gradient(circle at 70% 25%, rgba(255, 255, 255, .5), transparent 60%),
+    linear-gradient(180deg, var(--cream-deep), #CDBFA3);
+  color: var(--wine);
+}
+
+.placeholder__initials {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 9vw, 7rem);
+  line-height: 1;
+  letter-spacing: .05em;
+}
+
+.placeholder__icon {
+  width: 46px;
+  height: 46px;
+  fill: var(--wine);
+}
+
+.placeholder__hint {
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .75;
+  line-height: 1.7;
+}
+
+
+/* 4. NAVIGATION
+   ========================================================================== */
+.nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(calc(100% - 2 * var(--panel-gap)), var(--max-width));
+  padding: 12px 14px 12px 26px;
+  background: rgba(243, 236, 218, .9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateX(-50%);
+  transition: box-shadow .4s var(--ease), padding .4s var(--ease);
+}
+
+.nav.is-scrolled {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  box-shadow: 0 12px 30px -18px rgba(0, 0, 0, .55);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--wine);
+  letter-spacing: .08em;
+}
+
+.nav__logo span { margin: 0 .1em; opacity: .5; }
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 30px);
+}
+
+.nav__link {
+  position: relative;
+  padding: 6px 0;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color .3s var(--ease);
+}
+
+/* Soulignement animé */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--wine);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s var(--ease);
+}
+
+.nav__link:hover,
+.nav__link.is-active { color: var(--wine); }
+
+.nav__link:hover::after,
+.nav__link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav__link--cta {
+  padding: 10px 20px;
+  background: var(--wine);
+  color: var(--cream);
+  transition: background-color .3s var(--ease);
+}
+
+.nav__link--cta::after { display: none; }
+
+.nav__link--cta:hover,
+.nav__link--cta.is-active {
+  background: var(--wine-light);
+  color: var(--cream);
+}
+
+/* Bouton burger (mobile) */
+.nav__toggle {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.nav__toggle span {
+  position: absolute;
+  left: 10px;
+  width: 22px;
+  height: 1.5px;
+  background: var(--wine);
+  transition: transform .35s var(--ease), top .35s var(--ease);
+}
+
+.nav__toggle span:first-child { top: 16px; }
+.nav__toggle span:last-child  { top: 24px; }
+
+.nav__toggle[aria-expanded="true"] span:first-child { top: 20px; transform: rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:last-child  { top: 20px; transform: rotate(-45deg); }
+
+
+/* 5. HERO / COUVERTURE
+   ========================================================================== */
+.hero {
+  min-height: min(88vh, 820px);
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: .8rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.hero__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(220px, 34%) 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  margin-top: clamp(24px, 4vw, 48px);
+}
+
+.hero__photo {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 30px 50px -30px rgba(31, 26, 26, .55);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(4.2rem, 13.5vw, 12rem);
+  line-height: .85;
+  letter-spacing: -.01em;
+  color: var(--wine);
+  /* Le titre déborde légèrement sur la photo, comme sur une couverture */
+  margin-left: clamp(-160px, -12vw, -40px);
+  white-space: nowrap;
+}
+
+.hero__identity { margin-top: clamp(14px, 2vw, 24px); }
+
+.hero__name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.hero__role {
+  margin-top: 8px;
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: .04em;
+  color: var(--wine);
+}
+
+.hero__tagline {
+  max-width: 420px;
+  margin-top: clamp(18px, 2.5vw, 30px);
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: .62rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--wine);
+  transform: translateX(-50%);
+  opacity: .7;
+}
+
+.hero__scroll::after {
+  content: '';
+  width: 1px;
+  height: 34px;
+  background: var(--wine);
+  transform-origin: top;
+  animation: scrollLine 2.2s var(--ease) infinite;
+}
+
+
+/* 6. À PROPOS
+   ========================================================================== */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 90px);
+}
+
+.about__lead {
+  position: relative;
+  max-width: 560px;
+  margin-top: clamp(24px, 3vw, 40px);
+  padding-left: 34px;
+  font-size: clamp(1rem, 1.3vw, 1.08rem);
+  line-height: 1.85;
+  color: rgba(243, 236, 218, .9);
+}
+
+.quote-mark {
+  position: absolute;
+  top: -.25em;
+  left: 0;
+  font-family: var(--font-serif);
+  font-size: 3.6rem;
+  line-height: 1;
+  opacity: .55;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: .55em 1.1em;
+  border: 1px solid rgba(243, 236, 218, .3);
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+.chip:hover { background: var(--cream); color: var(--wine); }
+.chip:hover .chip__star { fill: var(--wine); }
+
+.chip__star {
+  width: 10px;
+  height: 10px;
+  fill: var(--cream);
+  transition: fill .3s var(--ease);
+}
+
+.about__photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-width: 380px;
+  justify-self: center;
+  width: 100%;
+  border: 8px solid var(--white);
+  transform: rotate(2deg);
+  box-shadow: 0 30px 50px -25px rgba(0, 0, 0, .6);
+  transition: transform .6s var(--ease);
+}
+
+.about__photo:hover { transform: rotate(0deg) scale(1.02); }
+
+.about__photo-star {
+  top: -26px;
+  right: -26px;
+  width: 52px;
+}
+
+
+/* 7. COMPÉTENCES
+   ========================================================================== */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(28px, 4vw, 52px) clamp(28px, 6vw, 90px);
+  margin-top: clamp(34px, 5vw, 60px);
+}
+
+.skill-cat {
+  position: relative;
+  padding-top: 18px;
+  border-top: 1px solid rgba(92, 10, 20, .2);
+}
+
+/* Le grand numéro décoratif derrière chaque catégorie */
+.skill-cat__num {
+  position: absolute;
+  top: -10px;
+  left: -6px;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 7vw, 5.6rem);
+  line-height: 1;
+  color: var(--wine);
+  opacity: .1;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+
+.skill-cat:hover .skill-cat__num {
+  opacity: .22;
+  transform: translateY(-4px);
+}
+
+.skill-cat__title {
+  position: relative;
+  margin: 18px 0 16px;
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.tools__label {
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.tools__line {
+  flex: 1;
+  min-width: 40px;
+  height: 1px;
+  background: rgba(92, 10, 20, .35);
+}
+
+.tools__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: .5em 1em;
+  background: var(--wine);
+  color: var(--cream);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .05em;
+  transition: transform .3s var(--ease), background-color .3s var(--ease);
+}
+
+.tool:hover { transform: translateY(-3px); background: var(--wine-light); }
+
+.tool svg { width: 16px; height: 16px; fill: currentColor; }
+
+
+/* 8. PROJETS
+   ========================================================================== */
+.projects__intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.projects__sub,
+.journey__sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  color: var(--ink-soft);
+}
+
+.project {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 5vw, 70px);
+  align-items: start;
+}
+
+.project--reverse .project__info { order: 2; }
+.project--reverse .ghost-number  { right: auto; left: .1em; }
+
+.project__info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.project__kicker {
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+
+.project__title {
+  margin-top: -14px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+}
+
+.project__desc { color: rgba(243, 236, 218, .85); }
+
+.project__label {
+  margin-bottom: 12px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+
+/* Liste des fonctionnalités avec petites étoiles comme puces */
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 20px;
+  font-size: .88rem;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.feature-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  top: .1em;
+  font-size: .7em;
+  opacity: .7;
+}
+
+/* Galerie : une grande maquette + deux petites */
+.project__gallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.mock {
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--white);
+  box-shadow: 0 24px 40px -24px rgba(0, 0, 0, .7);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+
+.mock--main { grid-column: 1 / -1; }
+
+.mock:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 34px 50px -26px rgba(0, 0, 0, .8);
+}
+
+.mock__bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 10px;
+  background: var(--cream-deep);
+}
+
+.mock__bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(92, 10, 20, .3);
+}
+
+.mock__bar span {
+  margin-left: 10px;
+  font-size: .6rem;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mock__screen {
+  overflow: hidden;
+}
+
+/* Zoom très léger sur les visuels au survol */
+.mock__screen > svg,
+.mock__screen > img {
+  width: 100%;
+  height: auto;
+  transition: transform .8s var(--ease);
+}
+
+.mock:hover .mock__screen > svg,
+.mock:hover .mock__screen > img { transform: scale(1.04); }
+
+.project__caption {
+  grid-column: 1 / -1;
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .55;
+}
+
+
+/* 9. PARCOURS — TIMELINE
+   ========================================================================== */
+.journey .section-title { display: inline-block; margin-right: 18px; }
+.journey__sub { display: inline-block; }
+
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: clamp(44px, 6vw, 72px);
+}
+
+/* Ligne horizontale reliant les étapes */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(92, 10, 20, .3);
+}
+
+.timeline__item { position: relative; padding-top: 44px; }
+
+.timeline__marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 23px;
+  height: 23px;
+  fill: var(--wine);
+  background: var(--cream);
+  padding: 0 0;
+  transition: transform .5s var(--ease);
+}
+
+.timeline__item:hover .timeline__marker { transform: rotate(45deg) scale(1.15); }
+
+.timeline__date {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  color: var(--wine);
+}
+
+.timeline__title {
+  max-width: 300px;
+  margin-top: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.timeline__place {
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.timeline__item--current .timeline__place::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--wine);
+  vertical-align: middle;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+
+/* 10. SAVOIR-FAIRE
+   ========================================================================== */
+.abilities__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: clamp(36px, 5vw, 60px);
+  border-top: 1px solid rgba(243, 236, 218, .2);
+  border-left: 1px solid rgba(243, 236, 218, .2);
+}
+
+.ability {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 190px;
+  padding: 26px 22px;
+  border-right: 1px solid rgba(243, 236, 218, .2);
+  border-bottom: 1px solid rgba(243, 236, 218, .2);
+  transition: background-color .4s var(--ease), color .4s var(--ease);
+}
+
+.ability svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .4s var(--ease);
+}
+
+.ability__num {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  opacity: .5;
+}
+
+.ability h3 {
+  margin-top: auto;
+  font-size: .92rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: .02em;
+}
+
+.ability:hover { background: var(--cream); color: var(--wine); }
+.ability:hover svg { transform: translateY(-4px); }
+
+
+/* 11. CONTACT & PIED DE PAGE
+   ========================================================================== */
+.contact {
+  text-align: center;
+  padding-top: clamp(56px, 9vw, 120px);
+  padding-bottom: clamp(56px, 9vw, 120px);
+}
+
+.contact__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3rem, 10vw, 8.5rem);
+  line-height: .9;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.contact__title em {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: .62em;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.contact__text {
+  max-width: 520px;
+  margin: 28px auto 0;
+  color: var(--ink-soft);
+}
+
+.contact__links {
+  max-width: 720px;
+  margin: clamp(36px, 5vw, 56px) auto clamp(36px, 5vw, 52px);
+  border-top: 1px solid rgba(92, 10, 20, .25);
+  text-align: left;
+}
+
+.contact__link {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 8px;
+  border-bottom: 1px solid rgba(92, 10, 20, .25);
+  transition: background-color .35s var(--ease), color .35s var(--ease), padding .35s var(--ease);
+}
+
+.contact__label {
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--wine);
+  transition: color .35s var(--ease);
+}
+
+.contact__value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  overflow-wrap: anywhere;
+}
+
+.contact__arrow {
+  font-size: 1.2rem;
+  color: var(--wine);
+  transition: transform .35s var(--ease), color .35s var(--ease);
+}
+
+.contact__link:hover {
+  padding-left: 22px;
+  padding-right: 22px;
+  background: var(--wine);
+  color: var(--cream);
+}
+
+.contact__link:hover .contact__label,
+.contact__link:hover .contact__arrow { color: var(--cream); }
+.contact__link:hover .contact__arrow { transform: translate(3px, -3px); }
+
+.footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 10px var(--panel-gap) 34px;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #A9A39C;
+}
+
+.footer__top { transition: color .3s var(--ease); }
+.footer__top:hover { color: var(--cream); }
+
+
+/* 12. ANIMATIONS
+   ========================================================================== */
+
+/* Apparition au scroll (activée seulement si JS est présent : classe .js) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scintillement des étoiles */
+.star--twinkle { animation: twinkle 4s ease-in-out infinite; }
+.star--float   { animation: float 9s ease-in-out infinite; }
+
+@keyframes twinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  50%      { transform: scale(.75) rotate(20deg); opacity: .6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-14px) rotate(15deg); }
+}
+
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); }
+  50%  { transform: scaleY(1); }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .3; }
+}
+
+/* Respect des préférences d'accessibilité : pas d'animation */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
+
+
+/* 13. RESPONSIVE
+   ========================================================================== */
+
+/* --- Tablette paysage --- */
+@media (max-width: 1080px) {
+  .abilities__grid { grid-template-columns: repeat(2, 1fr); }
+  .ability { min-height: 160px; }
+
+  .project { grid-template-columns: 1fr; }
+  .project--reverse .project__info { order: 0; }
+}
+
+/* --- Tablette portrait : menu burger --- */
+@media (max-width: 860px) {
+  .nav { padding: 8px 8px 8px 20px; }
+
+  .nav__toggle { display: block; }
+
+  .nav__menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 20px 20px;
+    background: var(--cream);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, .5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .35s var(--ease), transform .35s var(--ease), visibility .35s;
+  }
+
+  .nav__menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav__menu li { border-bottom: 1px solid rgba(92, 10, 20, .12); }
+  .nav__menu li:last-child { border-bottom: 0; margin-top: 14px; }
+
+  .nav__link {
+    display: block;
+    padding: 14px 0;
+    font-size: .8rem;
+  }
+
+  .nav__link::after { display: none; }
+  .nav__link--cta { padding: 14px 20px; text-align: center; }
+
+  /* Hero : photo au-dessus du texte */
+  .hero { min-height: auto; padding-bottom: 80px; }
+
+  .hero__grid { grid-template-columns: 1fr; }
+
+  .hero__photo {
+    width: min(62%, 300px);
+    justify-self: start;
+  }
+
+  .hero__content { margin-top: 8px; }
+
+  /* Décor allégé sur petits écrans */
+  .hero__scroll,
+  .hero > svg.star:nth-of-type(2) { display: none; }
+
+  .hero__title { margin-left: 0; }
+
+  .about__grid { grid-template-columns: 1fr; }
+  .about__photo { max-width: 320px; }
+
+  .timeline { grid-template-columns: 1fr; gap: 36px; }
+
+  /* Ligne verticale pour la timeline */
+  .timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 11px;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .timeline__item { padding: 0 0 0 48px; }
+}
+
+/* --- Téléphone --- */
+@media (max-width: 560px) {
+  body { font-size: 14.5px; }
+
+  main { padding-top: 84px; }
+
+  .nav { top: 10px; }
+
+  .hero__top { font-size: .68rem; }
+  .hero__top span:last-child { text-align: right; }
+
+  .hero__photo { width: 70%; }
+
+  .hero__title { font-size: clamp(3.6rem, 19vw, 5.6rem); }
+
+  .hero__actions { width: 100%; }
+  .hero__actions .btn { flex: 1 1 100%; justify-content: center; }
+
+  .skills > .star,
+  .projects__intro > .star { display: none; }
+
+  .skills__grid { grid-template-columns: 1fr; }
+
+  .tools__line { display: none; }
+
+  .feature-list { grid-template-columns: 1fr; }
+
+  .project__gallery { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .abilities__grid { grid-template-columns: 1fr; }
+  .ability { min-height: 0; flex-direction: row; align-items: center; padding: 20px 18px; }
+  .ability h3 { margin-top: 0; padding-right: 30px; }
+  .ability__num { top: 50%; transform: translateY(-50%); }
+
+  .contact__link {
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+  }
+  .contact__label { grid-column: 1 / -1; }
+  .contact__value { grid-column: 1; }
+  .contact__arrow { grid-column: 2; grid-row: 2; }
+
+  .btn--large { width: 100%; justify-content: center; }
+
+  .footer { justify-content: center; text-align: center; }
+}
+  </style>
+
+  <!-- Active les animations uniquement si JavaScript est disponible -->
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- Symbole SVG réutilisable : l'étoile décorative à 4 branches -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="star" viewBox="0 0 24 24">
+      <path d="M12 0C12.6 7.8 16.2 11.4 24 12 16.2 12.6 12.6 16.2 12 24 11.4 16.2 7.8 12.6 0 12 7.8 11.4 11.4 7.8 12 0Z"/>
+    </symbol>
+  </svg>
+
+  <!-- Étoiles flottantes dans les marges (décor de fond) -->
+  <div class="bg-stars" aria-hidden="true">
+    <svg class="star star--float" style="top:6%;left:3%;width:34px"><use href="#star"/></svg>
+    <svg class="star star--float" style="top:22%;right:2%;width:46px;animation-delay:-2s"><use href="#star"/></svg>
+    <svg class="star star--float" style="top:48%;left:1.5%;width:52px;animation-delay:-4s"><use href="#star"/></svg>
+    <svg class="star star--float" style="top:71%;right:3%;width:30px;animation-delay:-1s"><use href="#star"/></svg>
+    <svg class="star star--float" style="top:90%;left:4%;width:40px;animation-delay:-3s"><use href="#star"/></svg>
+  </div>
+
+  <!-- =========================================================
+       NAVIGATION
+       ========================================================= -->
+  <nav class="nav" id="nav" aria-label="Navigation principale">
+    <a href="#accueil" class="nav__logo" aria-label="Retour à l'accueil">
+      I<span>·</span>M
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Ouvrir le menu">
+      <span></span><span></span>
+    </button>
+
+    <ul class="nav__menu" id="navMenu">
+      <li><a href="#apropos" class="nav__link">À propos</a></li>
+      <li><a href="#competences" class="nav__link">Compétences</a></li>
+      <li><a href="#projets" class="nav__link">Projets</a></li>
+      <li><a href="#parcours" class="nav__link">Parcours</a></li>
+      <li><a href="#savoir-faire" class="nav__link">Savoir-faire</a></li>
+      <li><a href="#contact" class="nav__link nav__link--cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- =========================================================
+         1. HERO / COUVERTURE
+         ========================================================= -->
+    <header class="panel panel--cream hero" id="accueil">
+      <div class="hero__top">
+        <span>2026</span>
+        <span>Génie Informatique &nbsp;|&nbsp; Portfolio</span>
+      </div>
+
+      <div class="hero__grid">
+        <!--
+          PHOTO PERSONNELLE
+          Pour la remplacer : placez votre photo dans assets/images/photo.jpg
+          puis remplacez tout le bloc <div class="placeholder ..."> ci-dessous par :
+          <img src="assets/images/photo.jpg" alt="Portrait d'Imane Mesllek">
+        -->
+        <figure class="hero__photo" data-reveal>
+          <div class="placeholder placeholder--portrait">
+            <span class="placeholder__initials">IM</span>
+            <span class="placeholder__hint">Votre photo<br>assets/images/photo.jpg</span>
+          </div>
+        </figure>
+
+        <div class="hero__content">
+          <h1 class="hero__title" data-reveal>
+            <span class="sr-only">Portfolio d'Imane Mesllek</span>
+            <span aria-hidden="true">portfolio</span>
+          </h1>
+
+          <div class="hero__identity" data-reveal style="--d:.15s">
+            <p class="hero__name">Imane Mesllek</p>
+            <p class="hero__role">Étudiante en<br>Génie Informatique</p>
+          </div>
+
+          <p class="hero__tagline" data-reveal style="--d:.3s">
+            Passionnée par le développement logiciel, les technologies web
+            et la création de solutions numériques.
+          </p>
+
+          <div class="hero__actions" data-reveal style="--d:.45s">
+            <a href="#projets" class="btn btn--wine">Voir mes projets <span class="btn__arrow">→</span></a>
+            <a href="#contact" class="btn btn--outline">Me contacter</a>
+          </div>
+        </div>
+      </div>
+
+      <svg class="star star--wine star--twinkle" style="top:13%;left:47%;width:46px"><use href="#star"/></svg>
+      <svg class="star star--wine star--twinkle" style="bottom:12%;right:44%;width:22px;animation-delay:-1.5s"><use href="#star"/></svg>
+      <svg class="star star--wine star--twinkle" style="top:8%;right:6%;width:16px;animation-delay:-3s"><use href="#star"/></svg>
+
+      <a href="#apropos" class="hero__scroll" aria-label="Défiler vers la section À propos">
+        <span>défiler</span>
+      </a>
+    </header>
+
+    <!-- =========================================================
+         2. À PROPOS DE MOI
+         ========================================================= -->
+    <section class="panel panel--wine about" id="apropos">
+
+      <div class="about__grid">
+        <div class="about__text">
+          <h2 class="section-title" data-reveal>À propos<br>de moi</h2>
+
+          <p class="about__lead" data-reveal style="--d:.1s">
+            <span class="quote-mark" aria-hidden="true">“</span>
+            Je suis une étudiante en Génie Informatique passionnée par les
+            technologies numériques et le développement logiciel. J'aime
+            apprendre de nouvelles technologies, concevoir des applications et
+            transformer des idées en solutions concrètes.
+          </p>
+
+          <ul class="chips" data-reveal style="--d:.2s">
+            <li class="chip"><svg class="chip__star"><use href="#star"/></svg>Génie Informatique</li>
+            <li class="chip"><svg class="chip__star"><use href="#star"/></svg>Développement Web</li>
+            <li class="chip"><svg class="chip__star"><use href="#star"/></svg>Bases de données</li>
+            <li class="chip"><svg class="chip__star"><use href="#star"/></svg>UML &amp; conception</li>
+            <li class="chip"><svg class="chip__star"><use href="#star"/></svg>Projets universitaires</li>
+          </ul>
+        </div>
+
+        <!--
+          SECONDE PHOTO (facultative)
+          Remplacez le bloc placeholder par :
+          <img src="assets/images/photo-2.jpg" alt="Imane Mesllek">
+        -->
+        <figure class="about__photo" data-reveal style="--d:.2s">
+          <div class="placeholder placeholder--soft">
+            <svg class="placeholder__icon"><use href="#star"/></svg>
+            <span class="placeholder__hint">Seconde photo<br>assets/images/photo-2.jpg</span>
+          </div>
+          <svg class="star star--cream star--twinkle about__photo-star"><use href="#star"/></svg>
+        </figure>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. MES COMPÉTENCES
+         ========================================================= -->
+    <section class="panel panel--cream skills" id="competences">
+      <h2 class="section-title section-title--wine" data-reveal>Mes compétences</h2>
+
+      <div class="skills__grid">
+        <article class="skill-cat" data-reveal>
+          <span class="skill-cat__num" aria-hidden="true">01</span>
+          <h3 class="skill-cat__title">Langages</h3>
+          <ul class="badges">
+            <li class="badge">C</li>
+            <li class="badge">C++</li>
+            <li class="badge">Java</li>
+            <li class="badge">Python</li>
+            <li class="badge">JavaScript</li>
+            <li class="badge">PHP</li>
+          </ul>
+        </article>
+
+        <article class="skill-cat" data-reveal style="--d:.1s">
+          <span class="skill-cat__num" aria-hidden="true">02</span>
+          <h3 class="skill-cat__title">Web</h3>
+          <ul class="badges">
+            <li class="badge">HTML5</li>
+            <li class="badge">CSS3</li>
+            <li class="badge">JavaScript</li>
+          </ul>
+        </article>
+
+        <article class="skill-cat" data-reveal style="--d:.2s">
+          <span class="skill-cat__num" aria-hidden="true">03</span>
+          <h3 class="skill-cat__title">Bases de données</h3>
+          <ul class="badges">
+            <li class="badge">MySQL</li>
+            <li class="badge">SQL</li>
+          </ul>
+        </article>
+
+        <article class="skill-cat" data-reveal style="--d:.3s">
+          <span class="skill-cat__num" aria-hidden="true">04</span>
+          <h3 class="skill-cat__title">Conception</h3>
+          <ul class="badges">
+            <li class="badge">UML</li>
+            <li class="badge">Merise</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- Ligne « Outils », comme la barre d'instruments de la référence -->
+      <div class="tools" data-reveal>
+        <h3 class="tools__label">Outils</h3>
+        <span class="tools__line" aria-hidden="true"></span>
+        <ul class="tools__list">
+          <li class="tool">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 3l4 2v14l-4 2-9-8-4 3-2-1V9l2-1 4 3 9-8zm0 5l-5 4 5 4V8zM4 10v4l2-2-2-2z"/></svg>
+            VS Code
+          </li>
+          <li class="tool">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 11.5 12.5 1a1.5 1.5 0 0 0-2.1 0L8.2 3.2l2.7 2.7a1.8 1.8 0 0 1 2.3 2.3l2.6 2.6a1.8 1.8 0 1 1-1.1 1v-2.5L12.3 9v6.3a1.8 1.8 0 1 1-1.5-.1V8.9a1.8 1.8 0 0 1-1-2.4L7.1 3.9 1 10a1.5 1.5 0 0 0 0 2.1L11.5 23a1.5 1.5 0 0 0 2.1 0L23 13.6a1.5 1.5 0 0 0 0-2.1z"/></svg>
+            Git
+          </li>
+          <li class="tool">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>
+            GitHub
+          </li>
+        </ul>
+      </div>
+
+      <svg class="star star--wine star--twinkle" style="top:9%;right:8%;width:30px"><use href="#star"/></svg>
+      <svg class="star star--wine star--twinkle" style="top:46%;left:49%;width:14px;animation-delay:-2s"><use href="#star"/></svg>
+    </section>
+
+    <!-- =========================================================
+         4. MES PROJETS
+         ========================================================= -->
+    <section class="projects" id="projets" aria-labelledby="projetsTitre">
+
+      <div class="panel panel--cream projects__intro">
+        <h2 class="section-title section-title--wine" id="projetsTitre" data-reveal>Mes projets</h2>
+        <p class="projects__sub" data-reveal style="--d:.1s">études de cas universitaires</p>
+        <svg class="star star--wine star--twinkle" style="top:30%;right:10%;width:28px"><use href="#star"/></svg>
+      </div>
+
+      <!-- ---------- PROJET 1 ---------- -->
+      <article class="panel panel--wine project">
+        <span class="ghost-number" aria-hidden="true">01</span>
+
+        <div class="project__info">
+          <p class="project__kicker" data-reveal>Projet 01 — Santé</p>
+          <h3 class="project__title" data-reveal style="--d:.05s">Plateforme de gestion du carnet de santé de l'enfant</h3>
+          <p class="project__desc" data-reveal style="--d:.1s">
+            Conception d'une plateforme permettant de centraliser et gérer les
+            informations médicales d'un enfant : identité, antécédents, allergies,
+            vaccinations, croissance, consultations, examens et traitements.
+          </p>
+
+          <div data-reveal style="--d:.15s">
+            <h4 class="project__label">Fonctionnalités</h4>
+            <ul class="feature-list">
+              <li>Gestion du dossier enfant</li>
+              <li>Gestion des vaccinations</li>
+              <li>Suivi de la croissance</li>
+              <li>Gestion des consultations</li>
+              <li>Gestion des examens</li>
+              <li>Gestion des comptes</li>
+              <li>Espace administrateur</li>
+            </ul>
+          </div>
+
+          <div data-reveal style="--d:.2s">
+            <h4 class="project__label">Technologies</h4>
+            <ul class="badges badges--light">
+              <li class="badge">HTML5</li>
+              <li class="badge">CSS3</li>
+              <li class="badge">JavaScript</li>
+              <li class="badge">PHP</li>
+              <li class="badge">MySQL</li>
+              <li class="badge">UML</li>
+            </ul>
+          </div>
+        </div>
+
+        <!--
+          GALERIE DU PROJET 1
+          Les maquettes ci-dessous sont des illustrations en SVG.
+          Pour mettre vos vraies captures, remplacez le contenu de chaque
+          <div class="mock__screen"> par une image, par exemple :
+          <img src="assets/images/projet1-1.jpg" alt="Tableau de bord du carnet de santé">
+        -->
+        <div class="project__gallery" data-reveal style="--d:.15s">
+          <figure class="mock mock--main">
+            <div class="mock__bar"><i></i><i></i><i></i><span>carnet-sante / tableau-de-bord</span></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 320 200" role="img" aria-label="Maquette du tableau de bord du carnet de santé">
+                <rect width="320" height="200" fill="#FBF8F1"/>
+                <rect width="62" height="200" fill="#5C0A14"/>
+                <circle cx="31" cy="26" r="11" fill="#F2EBD9"/>
+                <rect x="14" y="54" width="34" height="5" rx="2.5" fill="#F2EBD9"/>
+                <rect x="14" y="70" width="28" height="5" rx="2.5" fill="#F2EBD9" opacity=".5"/>
+                <rect x="14" y="86" width="32" height="5" rx="2.5" fill="#F2EBD9" opacity=".5"/>
+                <rect x="14" y="102" width="24" height="5" rx="2.5" fill="#F2EBD9" opacity=".5"/>
+                <rect x="14" y="118" width="30" height="5" rx="2.5" fill="#F2EBD9" opacity=".5"/>
+                <text x="78" y="25" font-size="10" font-family="Montserrat, sans-serif" font-weight="600" fill="#1F1A1A">Dossier de l'enfant</text>
+                <rect x="78" y="36" width="72" height="40" rx="6" fill="#F2EBD9"/>
+                <rect x="157" y="36" width="72" height="40" rx="6" fill="#F2EBD9"/>
+                <rect x="236" y="36" width="72" height="40" rx="6" fill="#F2EBD9"/>
+                <text x="86" y="52" font-size="7" font-family="Montserrat, sans-serif" fill="#5C0A14">Vaccinations</text>
+                <text x="165" y="52" font-size="7" font-family="Montserrat, sans-serif" fill="#5C0A14">Croissance</text>
+                <text x="244" y="52" font-size="7" font-family="Montserrat, sans-serif" fill="#5C0A14">Consultations</text>
+                <rect x="86" y="60" width="44" height="6" rx="3" fill="#5C0A14" opacity=".25"/>
+                <rect x="165" y="60" width="36" height="6" rx="3" fill="#5C0A14" opacity=".25"/>
+                <rect x="244" y="60" width="48" height="6" rx="3" fill="#5C0A14" opacity=".25"/>
+                <rect x="78" y="86" width="230" height="102" rx="6" fill="#fff" stroke="#E9E0C9"/>
+                <text x="88" y="102" font-size="7.5" font-family="Montserrat, sans-serif" font-weight="600" fill="#1F1A1A">Courbe de croissance</text>
+                <g stroke="#E9E0C9" stroke-width="1">
+                  <line x1="88" y1="124" x2="298" y2="124"/><line x1="88" y1="146" x2="298" y2="146"/><line x1="88" y1="168" x2="298" y2="168"/>
+                </g>
+                <polyline points="90,174 118,166 146,155 174,147 202,137 230,128 258,119 290,110" fill="none" stroke="#5C0A14" stroke-width="2" stroke-linejoin="round"/>
+                <g fill="#5C0A14">
+                  <circle cx="146" cy="155" r="2.6"/><circle cx="202" cy="137" r="2.6"/><circle cx="258" cy="119" r="2.6"/>
+                </g>
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="mock mock--small">
+            <div class="mock__bar"><i></i><i></i><i></i></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 160 120" role="img" aria-label="Maquette de la liste des vaccinations">
+                <rect width="160" height="120" fill="#FBF8F1"/>
+                <text x="12" y="20" font-size="8" font-family="Montserrat, sans-serif" font-weight="600" fill="#1F1A1A">Vaccinations</text>
+                <g font-family="Montserrat, sans-serif">
+                  <rect x="12" y="30" width="136" height="20" rx="4" fill="#fff" stroke="#E9E0C9"/>
+                  <circle cx="23" cy="40" r="5" fill="#5C0A14"/><path d="M20.5 40l1.8 1.8 3.2-3.4" stroke="#fff" stroke-width="1.2" fill="none"/>
+                  <rect x="34" y="37" width="60" height="5" rx="2.5" fill="#1F1A1A" opacity=".2"/>
+                  <rect x="12" y="56" width="136" height="20" rx="4" fill="#fff" stroke="#E9E0C9"/>
+                  <circle cx="23" cy="66" r="5" fill="#5C0A14"/><path d="M20.5 66l1.8 1.8 3.2-3.4" stroke="#fff" stroke-width="1.2" fill="none"/>
+                  <rect x="34" y="63" width="74" height="5" rx="2.5" fill="#1F1A1A" opacity=".2"/>
+                  <rect x="12" y="82" width="136" height="20" rx="4" fill="#fff" stroke="#E9E0C9"/>
+                  <circle cx="23" cy="92" r="5" fill="none" stroke="#5C0A14"/>
+                  <rect x="34" y="89" width="52" height="5" rx="2.5" fill="#1F1A1A" opacity=".2"/>
+                </g>
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="mock mock--small">
+            <div class="mock__bar"><i></i><i></i><i></i></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 160 120" role="img" aria-label="Maquette de la fiche d'identité de l'enfant">
+                <rect width="160" height="120" fill="#F2EBD9"/>
+                <rect x="12" y="12" width="136" height="96" rx="8" fill="#fff"/>
+                <circle cx="38" cy="40" r="15" fill="#5C0A14" opacity=".85"/>
+                <circle cx="38" cy="36" r="5" fill="#F2EBD9"/><path d="M29 49a9 9 0 0 1 18 0" fill="#F2EBD9"/>
+                <rect x="60" y="31" width="64" height="6" rx="3" fill="#1F1A1A" opacity=".75"/>
+                <rect x="60" y="43" width="44" height="5" rx="2.5" fill="#1F1A1A" opacity=".2"/>
+                <rect x="22" y="66" width="44" height="14" rx="7" fill="#5C0A14" opacity=".12"/>
+                <text x="28" y="76" font-size="6.5" font-family="Montserrat, sans-serif" fill="#5C0A14">Allergies</text>
+                <rect x="72" y="66" width="52" height="14" rx="7" fill="#5C0A14" opacity=".12"/>
+                <text x="78" y="76" font-size="6.5" font-family="Montserrat, sans-serif" fill="#5C0A14">Antécédents</text>
+                <rect x="22" y="88" width="96" height="5" rx="2.5" fill="#1F1A1A" opacity=".15"/>
+              </svg>
+            </div>
+          </figure>
+
+          <figcaption class="project__caption">Aperçus illustratifs — à remplacer par vos captures d'écran</figcaption>
+        </div>
+      </article>
+
+      <!-- ---------- PROJET 2 ---------- -->
+      <article class="panel panel--wine project project--reverse">
+        <span class="ghost-number" aria-hidden="true">02</span>
+
+        <div class="project__info">
+          <p class="project__kicker" data-reveal>Projet 02 — Sport &amp; Tourisme</p>
+          <h3 class="project__title" data-reveal style="--d:.05s">Plateforme Sportive et Touristique du Maroc</h3>
+          <p class="project__desc" data-reveal style="--d:.1s">
+            Développement d'une plateforme web combinant la gestion d'événements
+            sportifs et la découverte touristique du Maroc.
+          </p>
+
+          <div data-reveal style="--d:.15s">
+            <h4 class="project__label">Modules</h4>
+            <ul class="feature-list">
+              <li>Matchs</li>
+              <li>Billetterie</li>
+              <li>Hébergements</li>
+              <li>Activités</li>
+              <li>Quiz</li>
+              <li>Administration</li>
+            </ul>
+          </div>
+
+          <div data-reveal style="--d:.2s">
+            <h4 class="project__label">Technologies</h4>
+            <ul class="badges badges--light">
+              <li class="badge">HTML5</li>
+              <li class="badge">CSS3</li>
+              <li class="badge">JavaScript</li>
+              <li class="badge">PHP</li>
+              <li class="badge">Java</li>
+              <li class="badge">C++</li>
+              <li class="badge">MySQL</li>
+              <li class="badge">Google Maps API</li>
+            </ul>
+          </div>
+        </div>
+
+        <!--
+          GALERIE DU PROJET 2
+          Remplacez le contenu de chaque <div class="mock__screen"> par :
+          <img src="assets/images/projet2-1.jpg" alt="Carte interactive de la plateforme">
+        -->
+        <div class="project__gallery" data-reveal style="--d:.15s">
+          <figure class="mock mock--main">
+            <div class="mock__bar"><i></i><i></i><i></i><span>maroc-sport-tourisme / carte</span></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 320 200" role="img" aria-label="Maquette de la carte interactive">
+                <rect width="320" height="200" fill="#EADCC3"/>
+                <path d="M0 150C40 130 70 140 100 118S150 70 190 64 250 40 320 30V200H0Z" fill="#E2CFAE"/>
+                <path d="M0 176C50 160 90 168 130 150S210 120 320 104" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+                <path d="M30 0C60 40 40 70 70 96" fill="none" stroke="#B9D2D6" stroke-width="10" stroke-linecap="round" opacity=".7"/>
+                <g fill="#5C0A14">
+                  <path d="M118 96a9 9 0 1 1 18 0c0 7-9 15-9 15s-9-8-9-15z"/>
+                  <path d="M206 58a9 9 0 1 1 18 0c0 7-9 15-9 15s-9-8-9-15z"/>
+                  <path d="M250 120a9 9 0 1 1 18 0c0 7-9 15-9 15s-9-8-9-15z"/>
+                </g>
+                <g fill="#F2EBD9"><circle cx="127" cy="96" r="3"/><circle cx="215" cy="58" r="3"/><circle cx="259" cy="120" r="3"/></g>
+                <rect x="12" y="12" width="128" height="28" rx="14" fill="#fff"/>
+                <circle cx="27" cy="26" r="5" fill="none" stroke="#5C0A14" stroke-width="1.5"/>
+                <text x="38" y="29" font-size="8" font-family="Montserrat, sans-serif" fill="#1F1A1A">Découvrir le Maroc</text>
+                <rect x="176" y="142" width="132" height="46" rx="8" fill="#fff"/>
+                <rect x="186" y="152" width="26" height="26" rx="5" fill="#5C0A14"/>
+                <text x="220" y="162" font-size="7.5" font-family="Montserrat, sans-serif" font-weight="600" fill="#1F1A1A">Match à venir</text>
+                <rect x="220" y="169" width="60" height="5" rx="2.5" fill="#1F1A1A" opacity=".2"/>
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="mock mock--small">
+            <div class="mock__bar"><i></i><i></i><i></i></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 160 120" role="img" aria-label="Maquette d'un billet de match">
+                <rect width="160" height="120" fill="#FBF8F1"/>
+                <path d="M16 28h128v20a8 8 0 0 0 0 16v28H16V64a8 8 0 0 0 0-16z" fill="#5C0A14"/>
+                <text x="28" y="46" font-size="8" font-family="Montserrat, sans-serif" font-weight="600" fill="#F2EBD9" letter-spacing="1">BILLET</text>
+                <rect x="28" y="54" width="60" height="5" rx="2.5" fill="#F2EBD9" opacity=".5"/>
+                <line x1="104" y1="34" x2="104" y2="86" stroke="#F2EBD9" stroke-dasharray="3 3" opacity=".6"/>
+                <g fill="#F2EBD9"><rect x="112" y="42" width="2" height="34"/><rect x="116" y="42" width="1" height="34"/><rect x="119" y="42" width="3" height="34"/><rect x="124" y="42" width="1" height="34"/><rect x="127" y="42" width="2" height="34"/><rect x="131" y="42" width="1" height="34"/></g>
+                <rect x="28" y="72" width="44" height="5" rx="2.5" fill="#F2EBD9" opacity=".3"/>
+              </svg>
+            </div>
+          </figure>
+
+          <figure class="mock mock--small">
+            <div class="mock__bar"><i></i><i></i><i></i></div>
+            <div class="mock__screen">
+              <svg viewBox="0 0 160 120" role="img" aria-label="Maquette du module de quiz">
+                <rect width="160" height="120" fill="#F2EBD9"/>
+                <text x="14" y="22" font-size="8" font-family="Montserrat, sans-serif" font-weight="600" fill="#5C0A14">Quiz</text>
+                <rect x="14" y="30" width="110" height="6" rx="3" fill="#1F1A1A" opacity=".6"/>
+                <rect x="14" y="46" width="132" height="16" rx="8" fill="#fff"/>
+                <rect x="14" y="68" width="132" height="16" rx="8" fill="#5C0A14"/>
+                <rect x="14" y="90" width="132" height="16" rx="8" fill="#fff"/>
+                <circle cx="26" cy="54" r="3.5" fill="none" stroke="#5C0A14"/>
+                <circle cx="26" cy="76" r="3.5" fill="#F2EBD9"/>
+                <circle cx="26" cy="98" r="3.5" fill="none" stroke="#5C0A14"/>
+                <rect x="36" y="52" width="50" height="4" rx="2" fill="#1F1A1A" opacity=".2"/>
+                <rect x="36" y="74" width="64" height="4" rx="2" fill="#F2EBD9" opacity=".7"/>
+                <rect x="36" y="96" width="42" height="4" rx="2" fill="#1F1A1A" opacity=".2"/>
+              </svg>
+            </div>
+          </figure>
+
+          <figcaption class="project__caption">Aperçus illustratifs — à remplacer par vos captures d'écran</figcaption>
+        </div>
+      </article>
+    </section>
+
+    <!-- =========================================================
+         5. PARCOURS / FORMATION
+         ========================================================= -->
+    <section class="panel panel--cream journey" id="parcours">
+      <h2 class="section-title section-title--wine" data-reveal>Parcours</h2>
+      <p class="journey__sub" data-reveal style="--d:.1s">formation</p>
+
+      <ol class="timeline">
+        <li class="timeline__item" data-reveal>
+          <svg class="timeline__marker"><use href="#star"/></svg>
+          <span class="timeline__date">2023</span>
+          <h3 class="timeline__title">Baccalauréat</h3>
+        </li>
+        <li class="timeline__item" data-reveal style="--d:.15s">
+          <svg class="timeline__marker"><use href="#star"/></svg>
+          <span class="timeline__date">2023 — 2025</span>
+          <h3 class="timeline__title">Classes préparatoires en ingénierie informatique</h3>
+          <p class="timeline__place">EHEI Oujda</p>
+        </li>
+        <li class="timeline__item timeline__item--current" data-reveal style="--d:.3s">
+          <svg class="timeline__marker"><use href="#star"/></svg>
+          <span class="timeline__date">2025 — Aujourd'hui</span>
+          <h3 class="timeline__title">Formation en Génie Informatique</h3>
+          <p class="timeline__place">En cours</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- =========================================================
+         6. CE QUE JE SAIS FAIRE
+         ========================================================= -->
+    <section class="panel panel--wine abilities" id="savoir-faire">
+      <h2 class="section-title" data-reveal>Ce que je<br>sais faire</h2>
+
+      <ul class="abilities__grid">
+        <li class="ability" data-reveal>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+          <span class="ability__num">01</span>
+          <h3>Développement d'applications web</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.05s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"/></svg>
+          <span class="ability__num">02</span>
+          <h3>Conception de bases de données</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.1s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="6"/><rect x="14" y="15" width="7" height="6"/><rect x="14" y="3" width="7" height="6"/><path d="M10 6h4M17.5 9v6M6.5 9v9h7.5"/></svg>
+          <span class="ability__num">03</span>
+          <h3>Modélisation UML</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.15s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2"/><path d="M6.5 9.5l3 2.5-3 2.5M12 15h5"/></svg>
+          <span class="ability__num">04</span>
+          <h3>Programmation</h3>
+        </li>
+        <li class="ability" data-reveal>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M8 10.5h5M10.5 8v5"/></svg>
+          <span class="ability__num">05</span>
+          <h3>Analyse des besoins</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.05s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.3 2.5-6 5.5-6s5.5 2.7 5.5 6M14 14.5c.9-.6 1.9-1 3-1 2.5 0 4.5 2.2 4.5 5"/></svg>
+          <span class="ability__num">06</span>
+          <h3>Travail en équipe</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.1s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h4a2 2 0 1 1 4 0h4v4a2 2 0 1 1 0 4v4H4v-4a2 2 0 1 0 0-4z"/></svg>
+          <span class="ability__num">07</span>
+          <h3>Résolution de problèmes</h3>
+        </li>
+        <li class="ability" data-reveal style="--d:.15s">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5C5.5 4 9 4 12 6c3-2 6.5-2 9-.5V19c-2.5-1.5-6-1.5-9 .5-3-2-6.5-2-9-.5zM12 6v13.5"/></svg>
+          <span class="ability__num">08</span>
+          <h3>Apprentissage de nouvelles technologies</h3>
+        </li>
+      </ul>
+
+      <svg class="star star--cream star--twinkle" style="top:10%;right:7%;width:34px"><use href="#star"/></svg>
+      <svg class="star star--cream star--twinkle" style="top:22%;right:16%;width:14px;animation-delay:-2s"><use href="#star"/></svg>
+    </section>
+
+    <!-- =========================================================
+         7. CONTACT
+         ========================================================= -->
+    <section class="panel panel--cream contact" id="contact">
+      <h2 class="contact__title" data-reveal>
+        travaillons
+        <em>ensemble</em>
+      </h2>
+
+      <p class="contact__text" data-reveal style="--d:.1s">
+        Vous avez un projet, une opportunité de stage ou simplement envie
+        d'échanger ? N'hésitez pas à me contacter.
+      </p>
+
+      <!--
+        COORDONNÉES — email, LinkedIn et GitHub d'Imane Mesllek.
+      -->
+      <ul class="contact__links" data-reveal style="--d:.2s">
+        <li>
+          <a href="mailto:imanemesllek@gmail.com" class="contact__link">
+            <span class="contact__label">Email</span>
+            <span class="contact__value">imanemesllek@gmail.com</span>
+            <span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/imane-mesllek-3456683ba/" target="_blank" rel="noopener" class="contact__link">
+            <span class="contact__label">LinkedIn</span>
+            <span class="contact__value">linkedin.com/in/imane-mesllek</span>
+            <span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/imanoour" target="_blank" rel="noopener" class="contact__link">
+            <span class="contact__label">GitHub</span>
+            <span class="contact__value">github.com/imanoour</span>
+            <span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ul>
+
+      <a href="mailto:imanemesllek@gmail.com" class="btn btn--wine btn--large" data-reveal style="--d:.3s">
+        Me contacter <span class="btn__arrow">→</span>
+      </a>
+
+      <svg class="star star--wine star--twinkle" style="top:12%;right:10%;width:42px"><use href="#star"/></svg>
+      <svg class="star star--wine star--twinkle" style="bottom:16%;left:6%;width:20px;animation-delay:-2.5s"><use href="#star"/></svg>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       PIED DE PAGE
+       ========================================================= -->
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Imane Mesllek — Portfolio</p>
+    <a href="#accueil" class="footer__top">Haut de page ↑</a>
+  </footer>
+
+  <script>
+/* ==========================================================================
+   PORTFOLIO — IMANE MESLLEK
+   JavaScript vanilla : menu mobile, apparition au scroll,
+   lien actif dans la navigation, ombre de la barre au défilement.
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navLinks = document.querySelectorAll('.nav__link');
+
+  /* ------------------------------------------------------------------
+     1. Menu mobile (burger)
+     ------------------------------------------------------------------ */
+  const setMenu = (open) => {
+    navMenu.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  };
+
+  navToggle.addEventListener('click', () => {
+    setMenu(!navMenu.classList.contains('is-open'));
+  });
+
+  // Ferme le menu après un clic sur un lien
+  navLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));
+
+  // Ferme le menu avec la touche Échap
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenu(false);
+  });
+
+  // Ferme le menu si on clique en dehors
+  document.addEventListener('click', (event) => {
+    if (!nav.contains(event.target)) setMenu(false);
+  });
+
+  /* ------------------------------------------------------------------
+     2. Ombre sous la navigation quand on fait défiler la page
+     ------------------------------------------------------------------ */
+  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 20);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ------------------------------------------------------------------
+     3. Apparition progressive des éléments au scroll
+     ------------------------------------------------------------------ */
+  const revealItems = document.querySelectorAll('[data-reveal]');
+
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target); // l'animation ne se joue qu'une fois
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  } else {
+    // Ancien navigateur : on affiche tout directement
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+  }
+
+  /* ------------------------------------------------------------------
+     4. Mise en évidence du lien de la section visible
+     ------------------------------------------------------------------ */
+  const sections = document.querySelectorAll('main [id]');
+
+  if ('IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach((link) => {
+          link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+
+  /* ------------------------------------------------------------------
+     5. Année automatique dans le pied de page
+     ------------------------------------------------------------------ */
+  const year = document.getElementById('year');
+  if (year) year.textContent = new Date().getFullYear();
+});
+  </script>
+</body>
+</html>
